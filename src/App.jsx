@@ -1,3 +1,7 @@
 export default function App() {
-  return <h1>IT WORKS</h1>
+  return (
+    <div className="min-h-screen bg-white text-black">
+      {/* Navbar goes here */}
+    </div>
+  )
 }
