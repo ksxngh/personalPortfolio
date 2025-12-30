@@ -10,6 +10,16 @@ export default function App() {
           <ul className="flex gap-8 text-sm font-medium">
             <li><a href="#education" className="hover:text-gray-500">Education</a></li>
             <li><a href="#projects" className="hover:text-gray-500">Projects</a></li>
+            <li>
+              <a
+                href="/Karanveer-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-500"
+              >
+                Resume
+              </a>
+            </li>
             <li><a href="#contact" className="hover:text-gray-500">Contact</a></li>
           </ul>
         </div>
@@ -135,6 +145,7 @@ export default function App() {
         </div>
       </section>
 
+       
       {/* CONTACT */}
       <section id="contact" className="mx-auto max-w-6xl px-6 pb-40">
         <h2 className="text-3xl font-bold">Contact</h2>
