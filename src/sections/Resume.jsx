@@ -28,7 +28,7 @@ export default function Resume() {
             fontSize: '0.95rem',
             color: 'var(--text-muted)',
           }}>
-            Last updated 2025 · Available for Summer / Fall 2026
+            Last updated April 2026 · Available for Summer / Fall 2026
           </p>
           <a
             href="/resume.pdf"
