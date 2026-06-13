@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Constellation from '../components/Constellation'
 
 const ROLES = ['Full-Stack Developer', 'AI / ML Builder', 'CS @ SFU', 'Freelance Web Dev']
+const HERO_FORMS = ['sphere', 'text:KS', 'helix', 'torus', 'eye', 'neural']
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
@@ -52,9 +53,14 @@ export default function Hero() {
         right: 0,
         width: 'min(62%, 820px)',
         height: '100%',
-        pointerEvents: 'none',
+        pointerEvents: 'auto',
       }} className="hero-constellation">
-        <Constellation count={1200} />
+        <Constellation
+          count={1200}
+          forms={HERO_FORMS}
+          interactive
+          cycleMs={5200}
+        />
       </div>
 
       <div className="shell" style={{
