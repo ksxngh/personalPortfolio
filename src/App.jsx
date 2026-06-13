@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import Cursor from './components/Cursor'
 import Nav from './components/Nav'
 import Hero from './sections/Hero'

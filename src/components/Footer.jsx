@@ -1,30 +1,19 @@
 export default function Footer() {
   return (
-    <footer style={{
-      padding: '2rem',
-      borderTop: '1px solid var(--border)',
+    <footer className="shell" style={{
+      padding: 'var(--s-36) var(--s-30)',
+      borderTop: '1px solid var(--hairline)',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       flexWrap: 'wrap',
-      gap: '1rem',
-      background: 'var(--bg)',
+      gap: 'var(--s-18)',
     }}>
-      <span style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: '11px',
-        color: 'var(--text-dim)',
-        letterSpacing: '0.08em',
-      }}>
-        © 2025 <span style={{ color: 'var(--accent)' }}>Karanveer Singh</span> — Built with React + Vite
+      <span style={{ fontSize: '12px', letterSpacing: '0.05em', color: 'var(--color-smoke)' }}>
+        © 2026 <span style={{ color: 'var(--color-bone)' }}>Karanveer Singh</span> — Built with React + Vite
       </span>
-      <span style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: '11px',
-        color: 'var(--text-dim)',
-        letterSpacing: '0.08em',
-      }}>
-        ks2328679@gmail.com
+      <span style={{ fontSize: '12px', letterSpacing: '0.05em', color: 'var(--color-smoke)' }}>
+        Surrey, BC · ks2328679@gmail.com
       </span>
     </footer>
   )
