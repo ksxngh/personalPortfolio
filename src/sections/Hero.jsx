@@ -1,15 +1,8 @@
 import { useEffect, useState } from 'react'
+import CallCatchFigure from '../components/CallCatchFigure'
 
 const ROLES = ['Full-stack developer', 'AI / ML builder', 'SaaS founder', 'CS @ SFU']
 const TOOLS = ['Python', 'TypeScript', 'Next.js', 'FastAPI', 'Supabase', 'Twilio']
-
-// Translucent paper card composited over the graphite stage
-const glass = {
-  background: 'rgba(255,255,255,0.9)',
-  backdropFilter: 'blur(8px)',
-  WebkitBackdropFilter: 'blur(8px)',
-  border: '1px solid rgba(255,255,255,0.5)',
-}
 
 function Line({ children, delay, mounted }) {
   return (
@@ -41,12 +34,23 @@ export default function Hero() {
       <div className="shell">
         <div className="hero-grid" style={{
           display: 'grid',
-          gridTemplateColumns: '1.05fr 0.95fr',
+          gridTemplateColumns: '1fr 1fr',
           gap: 'var(--s-64)',
           alignItems: 'center',
         }}>
           {/* Left — editorial headline */}
           <div style={{ maxWidth: '560px' }}>
+            <div className="mono-label" style={{
+              display: 'flex', alignItems: 'center', gap: '12px',
+              color: 'var(--color-ink-charcoal)',
+              marginBottom: 'var(--s-24)',
+              opacity: mounted ? 1 : 0,
+              transition: 'opacity 0.8s ease 0.1s',
+            }}>
+              <span style={{ width: '28px', height: '1px', background: 'currentColor', flexShrink: 0 }} />
+              3rd year · Computing Science · SFU
+            </div>
+
             <h1 className="display" style={{ fontSize: 'clamp(3rem, 6.5vw, 4.25rem)', marginBottom: 'var(--s-24)' }}>
               <Line delay={150} mounted={mounted}>Karanveer Singh</Line>
             </h1>
@@ -101,74 +105,13 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — greyish-black stage with floating glass cards */}
-          <div className="hero-stage" style={{
-            position: 'relative',
-            aspectRatio: '4 / 5',
-            borderRadius: '24px',
-            overflow: 'hidden',
-            background: `
-              radial-gradient(90% 70% at 22% 12%, rgba(255,255,255,0.13) 0%, transparent 60%),
-              radial-gradient(80% 80% at 95% 100%, rgba(130,130,145,0.35) 0%, transparent 60%),
-              linear-gradient(155deg, #1b1b1f 0%, #2b2b31 45%, #47474f 100%)
-            `,
-            border: '1px solid #1f1f23',
+          {/* Right — Fig. 1: CallCatch */}
+          <div style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'none' : 'translateY(24px)',
             transition: 'opacity 1s ease 0.3s, transform 1s ease 0.3s',
           }}>
-            {/* Monogram watermark */}
-            <div style={{
-              position: 'absolute', inset: 0,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 'clamp(9rem, 22vw, 15rem)', fontWeight: 'var(--w-bold)',
-              letterSpacing: '-0.05em', color: 'rgba(255, 255, 255, 0.06)',
-              userSelect: 'none', lineHeight: 1,
-            }}>KS</div>
-
-            {/* Floating card — current focus */}
-            <div style={{
-              ...glass,
-              position: 'absolute', top: '7%', left: '7%',
-              borderRadius: 'var(--r-card)',
-              padding: 'var(--s-16)', maxWidth: '230px',
-              animation: 'floatCard 7s ease-in-out infinite',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-deep-lagoon)', animation: 'pulseDot 1.8s ease-in-out infinite' }} />
-                <span className="kicker" style={{ fontSize: '11px' }}>Currently</span>
-              </div>
-              <div style={{ fontSize: '15px', fontWeight: 'var(--w-emph)', lineHeight: 1.35, marginBottom: '4px' }}>
-                Founder @ CallCatch
-              </div>
-              <div style={{ fontSize: '13px', color: 'var(--color-stone-gray)', lineHeight: 1.4 }}>
-                Missed-call recovery SaaS, live in production
-              </div>
-            </div>
-
-            {/* Floating card — school */}
-            <div style={{
-              ...glass,
-              position: 'absolute', bottom: '9%', right: '7%',
-              borderRadius: 'var(--r-card)',
-              padding: 'var(--s-16)', minWidth: '160px',
-              animation: 'floatCard 7s ease-in-out infinite 1.4s',
-            }}>
-              <div className="display" style={{ fontSize: '2.4rem', lineHeight: 1, marginBottom: '6px' }}>3rd year</div>
-              <div className="kicker" style={{ fontSize: '11px' }}>SFU Computing Science</div>
-            </div>
-
-            {/* Floating chip — coordinates */}
-            <div style={{
-              ...glass,
-              position: 'absolute', bottom: '46%', left: '10%',
-              borderRadius: 'var(--r-pill)',
-              padding: '7px 14px', fontSize: '12px', fontWeight: 'var(--w-med)',
-              color: 'var(--color-stone-gray)', letterSpacing: '0.02em',
-              animation: 'floatCard 8s ease-in-out infinite 0.7s',
-            }}>
-              49.19° N / 122.85° W
-            </div>
+            <CallCatchFigure />
           </div>
         </div>
 
@@ -201,8 +144,7 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 860px) {
-          .hero-grid { grid-template-columns: 1fr !important; gap: var(--s-40) !important; }
-          .hero-stage { aspect-ratio: 3 / 2 !important; max-width: 520px; }
+          .hero-grid { grid-template-columns: 1fr !important; gap: var(--s-48) !important; }
           .tools-strip { grid-template-columns: repeat(3, 1fr) !important; }
           .tools-strip > div:nth-child(3) { border-right: none !important; }
           .tools-strip > div:nth-child(-n+3) { border-bottom: 1px solid var(--color-soft-mist); }
