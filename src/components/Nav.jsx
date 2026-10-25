@@ -7,7 +7,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 24)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -20,88 +20,107 @@ export default function Nav() {
 
   return (
     <nav style={{
-      position: 'fixed',
-      top: scrolled ? '14px' : '0px',
-      left: '50%',
-      transform: 'translateX(-50%)',
+      position: 'sticky',
+      top: 0,
       zIndex: 100,
-      width: scrolled ? 'min(1140px, calc(100% - 28px))' : '100%',
-      maxWidth: '1200px',
-      padding: scrolled ? '0 18px 0 24px' : '0 var(--s-30)',
-      height: '60px',
+      height: '64px',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
-      background: scrolled ? 'rgba(0, 0, 0, 0.72)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(14px)' : 'none',
-      border: scrolled ? '1px solid var(--hairline)' : '1px solid transparent',
-      borderRadius: 'var(--radius)',
+      background: scrolled ? 'rgba(242, 240, 235, 0.72)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(12px)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
+      borderBottom: `1px solid ${scrolled ? 'var(--color-soft-mist)' : 'transparent'}`,
+      transition: 'background 0.3s ease, border-color 0.3s ease',
     }}>
-      {/* Logo mark */}
-      <button onClick={() => scrollTo('hero')} style={{
-        display: 'flex', alignItems: 'center', gap: '9px',
-        background: 'none', border: 'none', cursor: 'none', padding: 0,
+      <div className="shell" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
       }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2 L22 12 L12 22 L2 12 Z" stroke="#8052ff" strokeWidth="1.5" />
-          <circle cx="12" cy="12" r="2.4" fill="#8052ff" />
-        </svg>
-        <span style={{
-          fontWeight: 'var(--w-semi)', fontSize: '18px', letterSpacing: '0.021em',
-          color: 'var(--color-bone)',
+        {/* Logo mark */}
+        <button onClick={() => scrollTo('hero')} style={{
+          display: 'flex', alignItems: 'center', gap: '9px',
+          background: 'none', border: 'none', cursor: 'pointer', padding: 0,
         }}>
-          Karanveer<span style={{ color: 'var(--color-smoke)' }}>.</span>
-        </span>
-      </button>
+          <span style={{
+            width: '26px', height: '26px', borderRadius: '7px',
+            background: 'var(--grad-graphite)', color: 'var(--color-paper-white)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '13px', fontWeight: 'var(--w-bold)', letterSpacing: '-0.02em',
+          }}>KS</span>
+          <span style={{
+            fontWeight: 'var(--w-emph)', fontSize: '17px', letterSpacing: '-0.01em',
+            color: 'var(--color-ink-charcoal)',
+          }}>
+            Karanveer Singh
+          </span>
+        </button>
 
-      {/* Desktop links */}
-      <div style={{ display: 'flex', gap: 'var(--s-30)', alignItems: 'center' }} className="desktop-nav">
-        {links.map(l => (
-          <button key={l} onClick={() => scrollTo(l)} className="nav-link">{l}</button>
-        ))}
-        <a className="btn-plum" href="mailto:ks2328679@gmail.com">Get in Touch</a>
+        {/* Desktop links — centered */}
+        <div style={{ display: 'flex', gap: 'var(--s-32)', alignItems: 'center' }} className="desktop-nav">
+          {links.map(l => (
+            <button key={l} onClick={() => scrollTo(l)} style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+              fontWeight: 'var(--w-reg)', fontSize: '15px', color: 'var(--color-ink-charcoal)',
+              textTransform: 'capitalize', borderBottom: '1px solid transparent',
+              transition: 'border-color 0.2s ease',
+            }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-ink-charcoal)')}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'transparent')}
+            >{l}</button>
+          ))}
+        </div>
+
+        {/* Right actions */}
+        <div style={{ display: 'flex', gap: 'var(--s-12)', alignItems: 'center' }} className="desktop-nav">
+          <a className="btn-ghost" href="/ResumeKaranveer.pdf" target="_blank" rel="noopener noreferrer">Résumé</a>
+          <a className="btn-lilac" href="mailto:ks2328679@gmail.com">Get in touch</a>
+        </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="mobile-menu-btn"
+          aria-label="Menu"
+          style={{
+            display: 'none', background: 'none', border: 'none', cursor: 'pointer',
+            flexDirection: 'column', gap: '5px', padding: '4px',
+          }}
+        >
+          {[0, 1, 2].map(i => (
+            <span key={i} style={{
+              display: 'block', width: '22px', height: '1.5px', background: 'var(--color-ink-charcoal)',
+              transition: 'transform 0.25s ease, opacity 0.25s ease',
+              transform: open && i === 0 ? 'translateY(6.5px) rotate(45deg)' :
+                         open && i === 2 ? 'translateY(-6.5px) rotate(-45deg)' : 'none',
+              opacity: open && i === 1 ? 0 : 1,
+            }} />
+          ))}
+        </button>
       </div>
-
-      {/* Mobile hamburger */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="mobile-menu-btn"
-        aria-label="Menu"
-        style={{
-          display: 'none', background: 'none', border: 'none', cursor: 'pointer',
-          flexDirection: 'column', gap: '5px', padding: '4px',
-        }}
-      >
-        {[0, 1, 2].map(i => (
-          <span key={i} style={{
-            display: 'block', width: '22px', height: '1.5px', background: 'var(--color-bone)',
-            transition: 'transform 0.25s ease, opacity 0.25s ease',
-            transform: open && i === 0 ? 'translateY(6.5px) rotate(45deg)' :
-                       open && i === 2 ? 'translateY(-6.5px) rotate(-45deg)' : 'none',
-            opacity: open && i === 1 ? 0 : 1,
-          }} />
-        ))}
-      </button>
 
       {/* Mobile dropdown */}
       {open && (
         <div style={{
-          position: 'absolute', top: '70px', left: 0, right: 0,
-          background: 'rgba(0, 0, 0, 0.95)', border: '1px solid var(--hairline)',
-          borderRadius: 'var(--radius)', padding: 'var(--s-24)',
-          display: 'flex', flexDirection: 'column', gap: 'var(--s-18)',
-          backdropFilter: 'blur(14px)',
+          position: 'absolute', top: '64px', left: '12px', right: '12px',
+          background: 'var(--color-paper-white)', border: '1px solid var(--color-soft-mist)',
+          borderRadius: 'var(--r-card)', padding: 'var(--s-20)',
+          display: 'flex', flexDirection: 'column', gap: 'var(--s-16)',
         }}>
           {links.map(l => (
-            <button key={l} onClick={() => scrollTo(l)} className="nav-link" style={{ textAlign: 'left' }}>{l}</button>
+            <button key={l} onClick={() => scrollTo(l)} style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+              fontWeight: 'var(--w-med)', fontSize: '16px', color: 'var(--color-ink-charcoal)',
+              textTransform: 'capitalize', textAlign: 'left',
+            }}>{l}</button>
           ))}
-          <a className="btn-plum" href="mailto:ks2328679@gmail.com" style={{ justifyContent: 'center', marginTop: '6px' }}>Get in Touch</a>
+          <a className="btn-lilac" href="mailto:ks2328679@gmail.com" style={{ justifyContent: 'center', marginTop: '4px' }}>Get in touch</a>
         </div>
       )}
 
       <style>{`
-        @media (max-width: 820px) {
+        @media (max-width: 860px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }

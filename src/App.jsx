@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
-import Cursor from './components/Cursor'
+import AnnouncementBanner from './components/AnnouncementBanner'
 import Nav from './components/Nav'
 import Hero from './sections/Hero'
 import About from './sections/About'
 import Projects from './sections/Projects'
 import Skills from './sections/Skills'
+import FeatureBand from './sections/FeatureBand'
 import Experience from './sections/Experience'
 import Resume from './sections/Resume'
 import Contact from './sections/Contact'
@@ -18,10 +19,11 @@ export default function App() {
         entries.forEach(e => {
           if (e.isIntersecting) {
             e.target.classList.add('visible')
+            observer.unobserve(e.target)
           }
         })
       },
-      { threshold: 0.1 }
+      { threshold: 0.12 }
     )
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
@@ -29,13 +31,14 @@ export default function App() {
 
   return (
     <div className="relative">
-      <Cursor />
+      <AnnouncementBanner />
       <Nav />
       <main>
         <Hero />
         <About />
         <Projects />
         <Skills />
+        <FeatureBand />
         <Experience />
         <Resume />
         <Contact />
